@@ -119,6 +119,7 @@ public class EmptyDataSetView: UIView {
     internal var fadeInOnDisplay = false
     internal var verticalOffset: CGFloat = 0
     internal var verticalSpace: CGFloat = 11
+    internal var customImageSize: CGFloat = 0
     
     internal var didTapContentViewHandle: (() -> Void)?
     internal var didTapDataButtonHandle: (() -> Void)?
@@ -233,7 +234,15 @@ public class EmptyDataSetView: UIView {
                 subviewStrings.append("imageView")
                 views[subviewStrings.last!] = imageView
                 
-                contentView.addConstraint(NSLayoutConstraint.init(item: imageView, attribute: .centerX, relatedBy: .equal, toItem: contentView, attribute: .centerX, multiplier: 1.0, constant: 0.0))
+                if customImageSize == 0 {
+                    contentView.addConstraint(NSLayoutConstraint.init(item: imageView, attribute: .centerX, relatedBy: .equal, toItem: contentView, attribute: .centerX, multiplier: 1.0, constant: 0.0))
+                } else {
+                    NSLayoutConstraint.activate([
+                        imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+                        imageView.widthAnchor.constraint(equalToConstant: customImageSize),
+                        imageView.heightAnchor.constraint(equalToConstant: customImageSize),
+                    ])
+                }
             } else {
                 imageView.isHidden = true
             }

@@ -106,6 +106,13 @@ extension EmptyDataSetView {
         return self
     }
     
+    /// Set the image to custom size for width and height
+    @discardableResult
+    public func customImageSize(_ constraint: CGFloat) -> Self {
+        customImageSize = constraint
+        return self
+    }
+    
     //MARK: - Delegate & Events
     /// Asks the delegate to know if the empty dataset should fade in when displayed. Default is true.
     @discardableResult
